@@ -489,22 +489,26 @@ def get_videos(req_videos, def_format):
             else def_format
         )
         video_title = (
-            if len(video_parts) == 4 and video_parts[2] != "": 
-                video_parts[2]
-            elif len(video_parts) == 3 and video_parts[1] != "":
+            video_parts[2]
+            if len(video_parts) == 4 and video_parts[2] != ""
+            else (
                 video_parts[1]
-            else:
-                def_name
+                if len(video_parts) == 3 and video_parts[1] != ""
+            else def_name
+            )
         )
         video_topic = (
-            if len(video_parts) == 4 and video_parts[3] != "":
-                video_parts[3]  
-            elif len(video_parts) == 3 and video_parts[2] != "":
+            video_parts[3]
+            if len(video_parts) == 4 and video_parts[3] != "":  
+            else (
                 video_parts[2]
-             elif len(video_parts) == 2 and video_parts[1] != "":
-                video_parts[1]
-            else:
-                def_name
+                if len(video_parts) == 3 and video_parts[2] != "":
+                    else (
+                        video_parts[1]               
+                        len(video_parts) == 2 and video_parts[1] != "":
+                        else def_name
+                        )
+            )
         )
         videos.append((video_link, video_format, video_title, video_topic, True))
 
