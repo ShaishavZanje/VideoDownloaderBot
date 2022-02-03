@@ -484,10 +484,12 @@ def get_videos(req_videos, def_format):
         video_link = video_parts[0]
         video_format = (
             video_parts[1]
-            if len(video_parts) == 2 and video_parts[1] != ""
+            if len(video_parts) == 4 and video_parts[1] != ""
             else def_format
         )
-        videos.append((video_link, video_format, "", "", True))
+        video_title = video_parts[2]
+        video_topic = video_parts[3]
+        videos.append((video_link, video_format, video_title, video_topic, True))
 
     return videos
 
