@@ -479,6 +479,7 @@ async def download_videos(message, videos, index=1):
 
 def get_videos(req_videos, def_format):
     videos = []
+    def_name = ""
     for video in req_videos:
         video_parts = video.split("|")
         video_link = video_parts[0]
@@ -487,8 +488,16 @@ def get_videos(req_videos, def_format):
             if len(video_parts) == 4 and video_parts[1] != ""
             else def_format
         )
-        video_title = video_parts[2]
-        video_topic = video_parts[3]
+        video_title = (
+            video_parts[2]
+            if len(video_parts) == 4 and video_parts[2] != ""
+            else def_name
+        )
+        video_topic = (
+            video_parts[3]
+            if len(video_parts) == 4 and video_parts[3] != ""
+            else def_name
+        )
         videos.append((video_link, video_format, video_title, video_topic, True))
 
     return videos
