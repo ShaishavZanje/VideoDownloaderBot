@@ -505,7 +505,7 @@ def get_videos(req_videos, def_format):
                 if len(video_parts) == 3 and video_parts[2] != ""
                     else (
                         video_parts[1]               
-                        len(video_parts) == 2 and video_parts[1] != ""
+                        if len(video_parts) == 2 and video_parts[1] != ""
                         else def_name
                         )
             )
