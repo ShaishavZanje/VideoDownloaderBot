@@ -444,7 +444,7 @@ def download_video(message, video):
         return 1, "", caption, quote, filename
     yt_title, path = out1.split("\n")
     if title == "":
-        title = yt_title
+        title = "demo"
 
     download_cmd = f"{cmd} -R 25 --fragment-retries 25 --external-downloader aria2c --downloader-args 'aria2c: -x 16 -j 32'"
     st2, out2 = getstatusoutput(download_cmd)
@@ -453,7 +453,7 @@ def download_video(message, video):
         caption = f"Can't download link.\n\nBy: {NAME}\n\nTitle: {title}\n\nTopic: {topic}\n\nError: {out2}"
         return 2, "", caption, quote, filename
     else:
-        filename += "demo" + "." + path.split(".")[-1]
+        filename += "." + path.split(".")[-1]
         caption = f"By: {NAME}\n\nTitle: {title}\n\nTopic: {topic}"
         return 0, path, caption, quote, filename
 
