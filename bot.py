@@ -477,9 +477,8 @@ async def download_videos(message, videos, index=1):
     await message.reply("Done.")
 
 
-def get_videos(req_video, def_format):
+def get_videos(req_videos, def_format):
     videos = []
-    req_videos = req_video
     def_name = ""
     for video in req_videos:
         video_parts = video.split("|")
@@ -520,7 +519,7 @@ def get_videos(req_video, def_format):
 async def choose_video_format(bot, query):
     message = query.message.reply_to_message
     def_format = query.data
-    commands = message.text.split("\n")
+    commands = message.text.split()
     req_videos = commands[1:-1]
     videos = get_videos(req_videos, def_format)
     n = len(videos)
