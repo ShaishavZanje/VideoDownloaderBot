@@ -536,7 +536,7 @@ async def choose_video_format(bot, query):
 )
 async def download_link(bot, message):
     user = message.from_user.id if message.from_user is not None else None
-    commands = message.text.split()
+    commands = message.text.split(",")
     if len(commands) == 1:
         await message.reply(
             "Send video link(s) separated by space, and format separated by | or f at end to choose format (optional) \n\n"
