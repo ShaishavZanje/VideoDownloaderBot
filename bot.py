@@ -429,7 +429,13 @@ def download_video(message, video):
     cmd = (
         f"yt-dlp --socket-timeout 30 -o './downloads/{chat}/%(id)s.%(ext)s' -f {ytf} --no-warning '{link}'"
     )
-    filename = video[2]
+    filename = (
+        title.replace("/", "|")
+        .replace("+", "_")
+        .replace("?", ":Q:")
+        .replace("*", ":S:")
+        .replace("#", ":H:")
+    )
     filename_cmd = f"{cmd} -e --get-filename -R 25"
     st1, out1 = getstatusoutput(filename_cmd)
     if st1 != 0:
@@ -447,7 +453,7 @@ def download_video(message, video):
         caption = f"Can't download link.\n\nBy: {NAME}\n\nTitle: {title}\n\nTopic: {topic}\n\nError: {out2}"
         return 2, "", caption, quote, filename
     else:
-        filename += "." + path.split(".")[-1]
+        filename += "demo" "." + path.split(".")[-1]
         caption = f"By: {NAME}\n\nTitle: {title}\n\nTopic: {topic}"
         return 0, path, caption, quote, filename
 
