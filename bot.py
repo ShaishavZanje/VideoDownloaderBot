@@ -519,7 +519,7 @@ def get_videos(req_videos, def_format):
 async def choose_video_format(bot, query):
     message = query.message.reply_to_message
     def_format = query.data
-    commands = message.text.split()
+    commands = message.text.split(",")
     req_videos = commands[1:-1]
     videos = get_videos(req_videos, def_format)
     n = len(videos)
