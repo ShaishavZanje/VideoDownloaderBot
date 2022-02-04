@@ -167,7 +167,7 @@ def parse_html(file, def_format):
                 ):
                     continue
 
-                videos.append((video_link, def_format, "demo", topic_name, False))
+                videos.append((video_link, def_format, video_name, topic_name, False))
     elif mg_info is not None and len(buttons_soup) != 0:
         videos = []
         for button_soup in buttons_soup:
@@ -184,7 +184,7 @@ def parse_html(file, def_format):
                     or video_link.startswith("https://")
                 ):
                     continue
-                videos.append((video_link, def_format, "demo", topic_name, False))
+                videos.append((video_link, def_format, video_name, topic_name, False))
     elif mg_info is not None and paras_soup[0].b is not None:
         videos = []
         for topic_para in paras_soup:
@@ -202,7 +202,7 @@ def parse_html(file, def_format):
                     ):
                         continue
                     videos.append(
-                        (video_link, def_format, "demo", topic_name, False)
+                        (video_link, def_format, video_name, topic_name, False)
                     )
             else:
                 continue
@@ -220,7 +220,7 @@ def parse_html(file, def_format):
                 or video_link.startswith("https://")
             ):
                 continue
-            videos.append((video_link, def_format, "demo", topic_name, False))
+            videos.append((video_link, def_format, video_name, topic_name, False))
     else:
         videos = []
         topic_name = ""
@@ -232,7 +232,7 @@ def parse_html(file, def_format):
                 or video_link.startswith("https://")
             ):
                 continue
-            videos.append((video_link, def_format, "demo", topic_name, False))
+            videos.append((video_link, def_format, video_name, topic_name, False))
 
     return videos
 
