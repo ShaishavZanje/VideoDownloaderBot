@@ -495,8 +495,7 @@ def get_videos(req_videos, def_format,index=1):
         video_index = (
             video_parts[2]
             if len(video_parts) == 3 and video_parts[2] != ""
-            else video_index = index
-            )
+            else index
         )
         videos.append((video_link, video_format, video_title, video_index, True))
         index += 1
