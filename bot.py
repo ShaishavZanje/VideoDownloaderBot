@@ -364,9 +364,8 @@ def download_video(message, video):
     link = video[0]
     vid_format = video[1]
     title = video[2]
-    topic = video[3]
-    index = video[4]
-    quote = video[5]
+    index = video[3]
+    quote = video[4]
    
 
     if "magnetoscript" in link and ("brightcove" in link or len(link.split("/")[-1]) == 13):
@@ -456,7 +455,7 @@ def download_video(message, video):
         return 2, "", caption, quote, filename
     else:
         filename += "." + path.split(".")[-1]
-        caption = f"By: {NAME}\n\nTitle: {title}\n\nTopic: {topic} \n\nIndex: {index}"
+        caption = f"By: {NAME}\n\nTitle: {title}\n\nIndex: {index}"
         return 0, path, caption, quote, filename
 
 
@@ -477,57 +476,30 @@ async def download_videos(message, videos):
     await message.reply("Done.")
 
 
-def get_videos(req_videos, def_format):
+def get_videos(req_videos, def_format,index=1):
     videos = []
     def_name = ""
     for video in req_videos:
         video_parts = video.split("|")
         video_link = video_parts[0]
-        video_format = (
-            video_parts[1]
-            if len(video_parts) == 4 and video_parts[1] != ""
-            else def_format
-        )
+        video_format = def_format
         video_title = (
-            video_parts[2]
-            if len(video_parts) == 4 and video_parts[2] != ""
+            video_parts[1]
+            if len(video_parts) == 3 and video_parts[1] != ""
             else (
                 video_parts[1]
-                if len(video_parts) == 3 and video_parts[1] != ""
+                if len(video_parts) == 2 and video_parts[1] != ""
                 else def_name
             )
         )
-        video_topic = (
-            video_parts[3]
-            if len(video_parts) == 4 and video_parts[3] != ""
-            else (
-                video_parts[2]
-                if len(video_parts) == 3 and video_parts[2] != ""
-                else (
-                    video_parts[1]               
-                    if len(video_parts) == 2 and video_parts[1] != ""
-                    else def_name
-                )
-            )
-        )
         video_index = (
-            video_parts[4]
-            if len(video_parts) == 5 and video_parts[4] != ""
-            else (
-                video_parts[3]
-                if len(video_parts) == 4 and video_parts[3] != ""
-                else (
-                    video_parts[2]               
-                    if len(video_parts) == 3 and video_parts[2] != ""
-                    else(
-                        video_parts[1]               
-                        if len(video_parts) == 2 and video_parts[1] != ""
-                        else def_name
-                    )
-                )
+            video_parts[2]
+            if len(video_parts) == 3 and video_parts[2] != ""
+            else video_index = index
             )
         )
-        videos.append((video_link, video_format, video_title, video_topic, video_index, True))
+        videos.append((video_link, video_format, video_title, video_index, True))
+        index += 1
 
     return videos
 
